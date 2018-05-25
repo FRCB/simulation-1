@@ -15,26 +15,28 @@ export default class App extends Component {
         //     id: 1,
         //     imageURL: <img src='http://static.shoplightspeed.com/shops/613182/files/006379003/image.jpg' alt="Granita Mid Top Sneakers" />,
         //     productName: 'Granita Mid Top Sneakers',
-        //     price: '55'
+        //     price: 55
         //   },
         //   {
         //     id: 2,
         //     imageURL: <img src='https://static.wixstatic.com/media/2bf098_9ab538cbc4a741638fd1c43e9b8225e6~mv2.jpg_256' alt="Fancy Mode Leather Jacket" />,
         //     productName: 'Fancy Mode Leather Jacket',
-        //     price: '224'
+        //     price: 224
         //   },
         //   {
         //     id: 3,
         //     imageURL: <img src='https://www.ridersline.com.au/shop/1832-atmn_list/draggin-womens-twista.jpg' alt="Women Motocycle Pants" />,
         //     productName: 'Women Motocycle Pants',
-        //     price: '99'
+        //     price: 99
         //   }
       ]
     }
+    this.componentDidMount = this.componentDidMount.bind(this)
   }
 
   componentDidMount() {
     axios.get('/api/inventory').then((res) => {
+      console.log(res.data)
       this.setState({
         inventoryList: res.data
       })
@@ -42,13 +44,13 @@ export default class App extends Component {
   }
 
   render() {
-
     return (
       <div>
         <Dashboard
           inventoryList={this.state.inventoryList}
         />
-        <Form />
+        <Form
+          getRequest={this.componentDidMount} />
         <Header />
       </div>
     );

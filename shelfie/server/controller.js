@@ -3,14 +3,21 @@ module.exports = {
         const db = req.app.get('db');
 
         db.get_inventory()
-            .then(products => res.status(200).send(products))
+            .then(inventory => res.status(200).send(inventory))
             .catch(() => res.status(500).send())
     },
-    addProduct: (req, res) => {
+    createProduct: (req, res) => {
         const db = req.app.get('db');
-        const { imageURL, productName, quantityInput } = req.body
-        db.add_product([itemInput, priceInput, quantityInput])
+        const { imageurl, productname, price } = req.body
+
+        db.create_product([imageurl, productname, price])
             .then(products => res.status(200).send(products))
             .catch(() => res.status(500).send())
     },
+    deleteProduct: (req, res) => {
+        const db = req.app.get('db');
+        const id = req.params.id;
+        db.delete_product([id])
+            .then(products => res.status(200).send(products)).catch(() => res.status(500).send())
+    }
 }
