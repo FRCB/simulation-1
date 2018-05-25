@@ -31,10 +31,18 @@ export default class App extends Component {
         //   }
       ]
     }
-    this.componentDidMount = this.componentDidMount.bind(this)
+    this.getAll = this.getAll.bind(this)
   }
 
   componentDidMount() {
+    axios.get('/api/inventory').then((res) => {
+      this.setState({
+        inventoryList: res.data
+      })
+    })
+  }
+
+  getAll() {
     axios.get('/api/inventory').then((res) => {
       this.setState({
         inventoryList: res.data
@@ -49,7 +57,7 @@ export default class App extends Component {
           inventoryList={this.state.inventoryList}
         />
         <Form
-          getRequest={this.componentDidMount} />
+          getAll={this.getAll} />
         <Header />
       </div>
     );

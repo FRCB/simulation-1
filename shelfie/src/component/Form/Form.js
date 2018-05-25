@@ -32,7 +32,7 @@ export default class Form extends Component {
                 priceInput: ''
             })
         })
-        { this.props.getRequest }
+        { this.props.getAll }
     }
 
     deleteProduct(id) {
