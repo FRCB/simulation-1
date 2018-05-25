@@ -35,14 +35,7 @@ export default class Form extends Component {
         { this.props.getAll }
     }
 
-    deleteProduct(id) {
-        axios.delete(`api/product/${id}`).then(res => {
-            this.setState({ products: res.data })
-        })
-    }
-
     render() {
-        console.log(this.state)
         return (
             <div>
                 Form
