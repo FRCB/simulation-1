@@ -3,7 +3,7 @@ module.exports = {
         const db = req.app.get('db');
 
         db.get_inventory()
-            .then(inventory => res.status(200).send(inventory))
+            .then(inventoryList => res.status(200).send(inventoryList))
             .catch(() => res.status(500).send())
     },
     createProduct: (req, res) => {

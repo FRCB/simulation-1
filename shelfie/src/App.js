@@ -36,7 +36,6 @@ export default class App extends Component {
 
   componentDidMount() {
     axios.get('/api/inventory').then((res) => {
-      console.log(res.data)
       this.setState({
         inventoryList: res.data
       })
