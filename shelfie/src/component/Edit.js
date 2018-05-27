@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Product extends Component {
     constructor(props) {
@@ -51,13 +52,15 @@ export default class Product extends Component {
                         onClick={() => this.props.deleteProduct(this.props.id)} >
                         Delete
                     </button>
-                    <button
-                        onClick={() => this.toggle()}>
-                        {this.state.toggleBtn ? "Save" : "Edit"}
-                    </button>
+                    <Link to={`/edit/${this.props.id}`}>
+                        <button
+                            onClick={() => this.toggle()}>
+                            {this.state.toggleBtn ? "Save" : "Edit"}
+                        </button>
+                    </Link>
                 </div>
                 <hr />
-            </div>
+            </div >
         );
     }
 }
