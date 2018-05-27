@@ -14,6 +14,7 @@ massive(process.env.CONNECTION_STRING).then(db => app.set('db', db))
 app.get('/api/inventory', controller.getAll);
 app.post('/api/product', controller.createProduct);
 app.delete('/api/product/:id', controller.deleteProduct);
+app.put('/api/products/:id', controller.editProduct);
 
 
 const PORT = 4000
