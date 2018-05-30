@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Product from './Product';
+import Header from './Header';
 
 
 export default class Dashboard extends Component {
@@ -10,9 +11,16 @@ export default class Dashboard extends Component {
         this.state = {
             inventoryList: [],
         }
+        this.toRefresh = this.toRefresh.bind(this)
     }
 
     componentDidMount() {
+        axios.get('/api/inventory').then((res) => {
+            this.setState({ inventoryList: res.data })
+        })
+    }
+
+    toRefresh() {
         axios.get('/api/inventory').then((res) => {
             this.setState({ inventoryList: res.data })
         })
@@ -27,6 +35,7 @@ export default class Dashboard extends Component {
                         imageURL={e.imageurl}
                         productName={e.productname}
                         price={e.price}
+                        toRefresh={this.toRefresh}
                     />
                 </div>
             )
@@ -34,11 +43,12 @@ export default class Dashboard extends Component {
 
         return (
             <div>
+                <Header />
                 <div>
                     <h2>Dashboard</h2>
                     {mappedProducts}
                 </div>
-            </div>
+            </div >
         );
     }
 }

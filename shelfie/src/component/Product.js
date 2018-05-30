@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+
 export default class Product extends Component {
     constructor(props) {
         super(props);
@@ -16,30 +17,10 @@ export default class Product extends Component {
         this.toggleEdit = this.toggleEdit.bind(this)
     }
 
-    componentDidMount() {
-        this.setState({
-            urlEdit: this.state.urlEdit,
-            productNameEdit: this.state.productNameEdit,
-            priceEdit: this.state.priceEdit
-        })
-    }
-
     deleteProduct(id) {
         axios.delete(`api/product/${id}`).then(res => {
             this.setState({ products: res.data })
-        })
-    }
-
-    editProduct(id, imageurl, productname, price) {
-        const body = {
-            imageurl: imageurl,
-            productname: productname,
-            price: price
-        }
-        axios.put(`/api/products/${id}`, body).then(res => {
-            console.log(res.data)
-            this.setState({ products: res.data })
-        })
+        }).then(this.props.toRefresh())
     }
 
     toggleEdit() {
@@ -58,7 +39,7 @@ export default class Product extends Component {
         axios.put(`/api/products/${id}`, body).then(res => {
             console.log(res.data)
             this.setState({ products: res.data })
-        })
+        }).then(this.props.toRefresh())
     }
 
     render() {
@@ -71,9 +52,15 @@ export default class Product extends Component {
                     this.state.toggleBtn
                         ?
                         <div>
-                            <input value={this.state.urlEdit} onChange={(e) => this.setState({ urlEdit: e.target.value })} />
-                            <input value={this.state.productNameEdit} onChange={(e) => this.setState({ productNameEdit: e.target.value })} />
-                            <input value={this.state.priceEdit} onChange={(e) => this.setState({ priceEdit: e.target.value })} />
+                            <input
+                                value={this.state.urlEdit}
+                                onChange={(e) => this.setState({ urlEdit: e.target.value })} />
+                            <input
+                                value={this.state.productNameEdit}
+                                onChange={(e) => this.setState({ productNameEdit: e.target.value })} />
+                            <input
+                                value={this.state.priceEdit}
+                                onChange={(e) => this.setState({ priceEdit: e.target.value })} />
                         </div>
                         :
                         <div>
